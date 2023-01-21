@@ -1,0 +1,40 @@
+﻿@{
+	ViewBag.Title = "Заказы";
+}
+@model IEnumerable<Order>
+
+	<div class="row">
+		<table class="table table-striped table-hover table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">Id</th>
+					<th scope="col">Город назначения</th>
+					<th scope="col">Адрес назначения</th>
+					<th scope="col">Город отправления</th>
+					<th scope="col">Адрес отправления</th>
+					<th scope="col">Вес, кг</th>
+					<th scope="col">Дата забора груза</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var o in Model)
+				{
+					<tr class="clickable-row">
+						<th scope="row">@o.OrderId</th>
+						<td>@o.DstCity</td>
+						<td>@o.DstAddress</td>
+						<td>@o.SrcCity</td>
+						<td>@o.SrcAddress</td>
+						<td>@o.Weight</td>
+						<td>@o.PickupDate.ToString("D")</td>
+						<td><a asp-action="detail" asp-route-id="@o.OrderId" class="btn btn-info">Детали</a></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+	<div class="text-center">
+		<a class="btn btn-primary col-2" asp-controller="home" asp-action="index">На главную</a>
+	</div>
+

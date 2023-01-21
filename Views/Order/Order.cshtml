@@ -1,0 +1,46 @@
+﻿@{
+	ViewBag.Title = Model.DisplayMode == OrderDisplayMode.Show ? "Заказ " + Model.Order.OrderId : "Новый заказ";
+	bool disabled = Model.DisplayMode == OrderDisplayMode.Show;
+}
+@model OrderViewModel
+
+<form asp-action="create" method="post" class="form col-8 offset-2">
+	<h3 class="text-center">Заказ@(Model.Order == null || Model.Order.OrderId == 0 ? "" : " " + Model.Order.OrderId.ToString()):</h3>
+	<div class="mb-3">
+		<label asp-for="Order.DstCity" class="form-label">Город назначения:</label>
+		<div><span asp-validation-for="Order.DstCity" class="text-danger"></span></div>
+		<input asp-for="Order.DstCity" class="form-control" disabled="@disabled">
+	</div>
+	<div class="mb-3">
+		<label asp-for="Order.DstAddress" class="form-label">Адрес назначения:</label>
+		<div><span asp-validation-for="Order.DstAddress" class="text-danger"></span></div>
+		<input asp-for="Order.DstAddress" class="form-control" disabled="@disabled">
+	</div>
+	<div class="mb-3">
+		<label asp-for="Order.SrcCity" class="form-label">Город отправления:</label>
+		<div><span asp-validation-for="Order.SrcCity" class="text-danger"></span></div>
+		<input asp-for="Order.SrcCity" class="form-control" disabled="@disabled">
+	</div>
+	<div class="mb-3">
+		<label asp-for="Order.SrcAddress" class="form-label">Адрес назначения:</label>
+		<div><span asp-validation-for="Order.SrcAddress" class="text-danger"></span></div>
+		<input asp-for="Order.SrcAddress" class="form-control" disabled="@disabled">
+	</div>
+	<div class="mb-3">
+		<label asp-for="Order.Weight" class="form-label">Вес, кг:</label>
+		<div><span asp-validation-for="Order.Weight" class="text-danger"></span></div>
+		<input asp-for="Order.Weight" class="form-control" disabled="@disabled">
+	</div>
+	<div class="mb-3">
+		<label asp-for="Order.PickupDate" class="form-label">Дата забора груза:</label>
+		<div><span asp-validation-for="Order.PickupDate" class="text-danger"></span></div>
+		<input asp-for="Order.PickupDate" class="form-control" disabled="@disabled">
+	</div>
+	<div class="text-center">
+		@if (Model.DisplayMode == OrderDisplayMode.Create)
+		{
+			<input class="btn btn-primary me-2 col-2" type="submit" value="Создать заказ">
+		}
+		<a asp-controller="Home" asp-action="Index" class="btn btn-primary col-2">На главную</a>
+	</div>
+</form>
